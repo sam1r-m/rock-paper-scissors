@@ -15,22 +15,27 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     let result;
+    let winner;
     playerSelection = playerSelection.toLowerCase();
     playerSelection = capitalizeFirstLetter(playerSelection);
 
     if (playerSelection === computerSelection) {
         result = ("It's a Tie! " + playerSelection + " ties with " + computerSelection);
+        winner = "tie";
     }
     else if ((playerSelection === "Rock" && computerSelection === "Scissors") ||
              (playerSelection === "Paper" && computerSelection === "Rock") ||
              (playerSelection === "Scissors" && computerSelection === "Paper")) {
         result = ("You Win! " + playerSelection + " beats " + computerSelection);
+        winner = "player";
     }
     else {
         result = ("You Lose! " + computerSelection + " beats " + playerSelection);
+        winner = "computer";
     }
 
-    return result;
+    console.log(result);
+    return winner;
 }
 
 function capitalizeFirstLetter(word) {
@@ -40,3 +45,37 @@ function capitalizeFirstLetter(word) {
     return (word1 + word2);
 }
 
+function game() {
+    let computerScore = 0;
+    let playerScore = 0;
+    let winner;
+
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Rock, Paper or Scissors?");
+        winner = (playRound(playerSelection, getComputerChoice()));
+
+        switch(winner) {
+            case "computer":
+                computerScore += 1;
+                break;
+            case "player":
+                playerScore += 1;
+                break;
+            case "tie":
+                playerScore += 1;
+                computerScore += 1;
+        }
+    }
+
+    if (playerScore == computerScore) {
+        console.log("It's a Tie!");
+    }
+    else if (playerScore > computerScore) {
+        console.log("You Win!");
+    }
+    else if (computerScore > playerScore) {
+        console.log("You Lose!");
+    }
+
+    console.log("The score is " + playerScore + " - " + computerScore);
+}
