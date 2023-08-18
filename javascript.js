@@ -60,10 +60,6 @@ function game() {
                 break;
             case "player":
                 playerScore += 1;
-                break;
-            case "tie":
-                playerScore += 1;
-                computerScore += 1;
         }
     }
 
