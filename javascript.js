@@ -95,6 +95,8 @@ document.getElementById("scissors").addEventListener("click",
 function writeMessage(message) {
     let element = document.createElement("p");
     let text = document.createTextNode(message);
-    let div = document.getElementById("result");
+    element.appendChild(text);
+    
+    let div = document.getElementById("results");
     div.appendChild(element);
 }
