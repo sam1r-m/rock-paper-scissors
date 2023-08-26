@@ -34,7 +34,8 @@ function playRound(playerSelection, computerSelection) {
         winner = "computer";
     }
 
-    console.log(result);
+    writeMessage(result);
+    //console.log(result);
     return winner;
 }
 
@@ -50,7 +51,7 @@ function game() {
     let playerScore = 0;
     let winner;
 
-    for (let i = 0; i < 5; i++) {
+    /* for (let i = 0; i < 5; i++) {
         let playerSelection = prompt("Rock, Paper or Scissors?");
         winner = (playRound(playerSelection, getComputerChoice()));
 
@@ -61,7 +62,7 @@ function game() {
             case "player":
                 playerScore += 1;
         }
-    }
+    } */
 
     if (playerScore == computerScore) {
         console.log("It's a Tie!");
@@ -74,4 +75,26 @@ function game() {
     }
 
     console.log("The score is " + playerScore + " - " + computerScore);
+}
+
+document.getElementById("rock").addEventListener("click", 
+() => { 
+    playRound("Rock", getComputerChoice());
+});
+
+document.getElementById("paper").addEventListener("click", 
+() => { 
+    playRound("Paper", getComputerChoice());
+});
+
+document.getElementById("scissors").addEventListener("click", 
+() => { 
+    playRound("Scissors", getComputerChoice());
+});
+
+function writeMessage(message) {
+    let element = document.createElement("p");
+    let text = document.createTextNode(message);
+    let div = document.getElementById("result");
+    div.appendChild(element);
 }
