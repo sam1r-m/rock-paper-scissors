@@ -1,3 +1,13 @@
+let computerScore = 0;
+let playerScore = 0;
+
+let previousScore = document.createElement("h1");
+let score = document.getElementById("score");
+
+let text = document.createTextNode(playerScore + " - " + computerScore);
+previousScore.appendChild(text);
+score.appendChild(previousScore);
+
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3);
 
@@ -14,6 +24,10 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    if ((playerScore == 5) || (computerScore == 5)) {
+        return;
+    }
+
     let result;
     let winner;
     playerSelection = playerSelection.toLowerCase();
@@ -34,8 +48,16 @@ function playRound(playerSelection, computerSelection) {
         winner = "computer";
     }
 
+    switch(winner) {
+        case "computer":
+            computerScore += 1;
+            break;
+        case "player":
+            playerScore += 1;
+    }
+
+    printScore(playerScore, computerScore);
     writeMessage(result);
-    //console.log(result);
     return winner;
 }
 
@@ -99,4 +121,20 @@ function writeMessage(message) {
     
     let div = document.getElementById("results");
     div.appendChild(element);
+}
+
+function printScore(playerScore, computerScore) {
+/*     let element = document.createElement("h1");
+    let score = document.getElementById("score");
+    
+    let text = document.createTextNode(playerScore + " - " + computerScore);
+    element.appendChild(text);
+    score.appendChild(element); */
+    let newScore = document.createElement("h1");
+    let scoreText = document.createTextNode(playerScore + " - " + computerScore);
+    newScore.appendChild(scoreText);
+
+    score.replaceChild(newScore, previousScore);
+
+    previousScore = newScore;
 }
